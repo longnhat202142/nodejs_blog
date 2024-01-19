@@ -4,8 +4,12 @@ const handlebars = require('express-handlebars');
 const app = express();
 const port = 3000;
 const path = require('path');
+
+//HTTP logger
 app.use(morgan('combined'));
 
+// Truyền đường dẫn để css được
+app.use(express.static(path.join(__dirname, 'public')));
 //Templae engine
 app.engine(
     'hbs',
