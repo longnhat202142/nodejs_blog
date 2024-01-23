@@ -3,3 +3,9 @@ h1 {
 
 .card-course-item {
   margin-top: 50px; }
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 40%;
+  margin-right: 5px; }
