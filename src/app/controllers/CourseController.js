@@ -46,10 +46,23 @@ class CourseController {
 
     //[ DELETE] / courses/:id
     destroy(req, res, next) {
-        Course.deleteOne({ _id: req.params.id }, req.body)
+        Course.delete({ _id: req.params.id }, req.body)
             .then(() => res.redirect('back'))
             .catch(next);
     }
+
+
+    //[ PATCH] / courses/:id/restore
+    restore(req, res, next){
+        Course.restore({ _id: req.params.id } , req.body)
+        .then(() => {
+            // Xóa khóa học khỏi bảng dữ liệu sau khi khôi phục
+            return Course.findOne({deleted : false   });
+        })
+        .then(() => res.redirect('back'))
+        .catch(next);
+    
+}
 }
 
 module.exports = new CourseController();
