@@ -13,30 +13,18 @@
         </thead>
         <tbody>
             {{#each courses}}
-                <tr>
-                    <th scope='row'>{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
-                    <td>{{this.createAt}}</td>
-                    <td>
-                        <a href='' class='btn btn-link btn-restore' data-id='{{this._id}}'>Khôi phục</a>
-                        <a
-                            href=''
-                            class='btn btn-link'
-                            data-toggle='modal'
-                            data-id='{{this._id}}'
-                            data-target='#delete-course-modal'
-                        >Xoá</a>
+            <tr>
+                <th scope='row'>{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.createAt}}</td>
+                <td>
+                    <a href='' class='btn btn-link btn-restore' data-id='{{this._id}}'>Khôi phục</a>
+                    <a href='' class='btn btn-link' data-toggle='modal' data-id='{{this._id}}' data-target='#delete-course-modal'>Xoá</a>
 
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
-            {{else}}
-                <tr>
-                    <td colspan='5'>
-                        Thùng rác trống
-                        <a href='/me/stored/create'>Danh sách khoá học</a>
-                    </td>
-                </tr>
+           
             {{/each}}
         </tbody>
     </table>
@@ -68,14 +56,24 @@
 <form method='POST' name='restore-course-form'>
 </form>
 <script>
+    
+            
+       document.addEventListener('DOMContentLoaded', function () {
+    // Restores btn Clicked
+    var restoreForm =document.forms['restore-course-form'];
+    document.querySelectorAll('.btn-restore').forEach(element => {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Sử dụng thuộc tính dataset để lấy giá trị data-id
+            var coursesId = this.dataset.id;
+            console.log(coursesId);
+            restoreForm.action = '/courses/' + coursesId + '/restore?_method=PATCH';
+            restoreForm.submit(); 
+        })
+    })
+    
+});
 
-    document.addEventListener('DOMContentLoaded', function () { var courseId; var btnDeleteCourse =
-    document.getElementById('btn-delete-course'); var restoreForm =
-    document.forms['restore-course-form']; var restoreBtn = $('.btn-restore');
-    $('#delete-course-modal').on('show.bs.modal', function (event) { var button =
-    $(event.relatedTarget); courseId = button.data('id'); }); btnDeleteCourse.onclick = function ()
-    { deleteForms.action = '/courses/' + courseId + '?_method=DELETE'; deleteForms.submit(); } //
-    Restores btn Clicked restoreBtn.click(function(e) { e.preventDefault(); var coursesId=
-    $(this).data('id'); restoreForm.action = '/courses/' + coursesId + '/restore?_method=PATCH';
-    restoreForm.submit(); }); })
+
 </script>

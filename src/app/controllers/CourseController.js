@@ -51,18 +51,15 @@ class CourseController {
             .catch(next);
     }
 
-
     //[ PATCH] / courses/:id/restore
-    restore(req, res, next){
-        Course.restore({ _id: req.params.id } , req.body)
-        .then(() => {
-            // Xóa khóa học khỏi bảng dữ liệu sau khi khôi phục
-            return Course.findOne({deleted : false   });
-        })
-        .then(() => res.redirect('back'))
-        .catch(next);
-    
-}
+    restore(req, res, next) {
+        const {id} = req.params;
+        //const newData = {...req.body, deleted: true}
+        //console.log(newData);
+        Course.restore({_id:req.params.id }, req.body)
+            .then(() => res.redirect('back'))
+            .catch(next);
+    }
 }
 
 module.exports = new CourseController();

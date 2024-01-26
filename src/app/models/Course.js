@@ -12,6 +12,7 @@ const Course = new Schema({
     createAt: { type: Date, default: Date.now },
     updateAt: { type: Date, default: Date.now },
     slug: { type: String, slug: 'name', unique: true },
+    deleted :{type: Boolean }
 });
 
 // Add plugins
@@ -20,8 +21,5 @@ Course.plugin(mongooseDelete, {
     deletedAt: true,
     overrideMethods: 'all',
 });
-
-
-  
 
 module.exports = mongoose.model('Course', Course);
