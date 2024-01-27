@@ -12,19 +12,16 @@
             </tr>
         </thead>
         <tbody>
-            {{#each courses}}
-            <tr>
+           {{#each courses}}
+                <tr>
                 <th scope='row'>{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.createAt}}</td>
                 <td>
                     <a href='' class='btn btn-link btn-restore' data-id='{{this._id}}'>Khôi phục</a>
                     <a href='' class='btn btn-link' data-toggle='modal' data-id='{{this._id}}' data-target='#delete-course-modal'>Xoá</a>
-
                 </td>
-            </tr>
-
-           
+                </tr>
             {{/each}}
         </tbody>
     </table>
@@ -60,16 +57,15 @@
             
        document.addEventListener('DOMContentLoaded', function () {
     // Restores btn Clicked
-    var restoreForm =document.forms['restore-course-form'];
+    var restoreForm = document.forms['restore-course-form'];
     document.querySelectorAll('.btn-restore').forEach(element => {
         element.addEventListener('click', function(e) {
             e.preventDefault();
             
             // Sử dụng thuộc tính dataset để lấy giá trị data-id
             var coursesId = this.dataset.id;
-            console.log(coursesId);
             restoreForm.action = '/courses/' + coursesId + '/restore?_method=PATCH';
-            restoreForm.submit(); 
+            restoreForm.submit();
         })
     })
     

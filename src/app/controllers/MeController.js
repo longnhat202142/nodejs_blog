@@ -5,13 +5,13 @@ class MeController {
     storedCourses(req, res, next) {
 
 
-        Promise.all([Course.find({}), Course.countDocumentsDeleted() ])
-            .then(([courses ,deletedCount]) => res.render('me/stored-courses', {
+        // Promise.all([Course.find({}), Course.countDocumentsDeleted() ])
+        //     .then(([courses ,deletedCount]) => res.render('me/stored-courses', {
                 
-                deletedCount,
-                courses: mutipleMongooseToObject(courses),
-            }))
-            .catch(next);
+        //         deletedCount,
+        //         courses: mutipleMongooseToObject(courses),
+        //     }))
+        //     .catch(next);
 
         // Course.countDocumentsDeleted()
         // .then((deletedCount) =>{
@@ -20,23 +20,25 @@ class MeController {
         // .catch(() =>{})
 
 
-        // Course.find({})
-        //     .then((courses) =>
-        //         res.render('me/stored-courses', {
-        //             courses: mutipleMongooseToObject(courses),
-        //         }),
-        //     )
-        //     .catch(next);
+        Course.find({})
+            .then((courses) =>
+                res.render('me/stored-courses', {
+                    courses: mutipleMongooseToObject(courses),
+                }),
+            )
+            .catch(next);
     }
 
 
      // GET / trash /stored/courses
     trashCourses(req, res, next) {
         Course.findDeleted({})
-            .then((courses) =>
-                res.render('me/trash-courses', {
+            .then((courses) => {
+                console.log(courses);
+                return res.render('me/trash-courses', {
                     courses: mutipleMongooseToObject(courses),
-                }),
+                })
+            }
             )
             .catch(next);
     }
