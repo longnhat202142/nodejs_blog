@@ -19,11 +19,12 @@ class CourseController {
     store(req, res, next) {
         const formData = req.body;
         formData.image = 'https://files.fullstack.edu.vn/f8-prod/blog_posts/65/6139e2ba0f350.png';
+
         const course = new Course(formData);
         course
             .save()
             .then(() => res.redirect('/'))
-            .catch((err) => {});
+            .catch(next);
     }
 
     // [GET] / courses/:id/edit
