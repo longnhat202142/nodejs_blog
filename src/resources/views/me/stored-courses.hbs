@@ -9,13 +9,21 @@
             <label class="form-check-label" for="checkbox-all">Chọn tất cả</label>
         </div>
 
+<<<<<<< HEAD
         <select class="form-control form-control-sm checkbox-select-all-options" name="action" required="true">
+=======
+        <select class="form-control form-control-sm checkbox-select-all-options" name="action" required>
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
             <option value="">--- Chọn hành động ---</option>
             <option value="delete">Xoá</option>
 
         </select>
 
+<<<<<<< HEAD
         <button class="btn btn-primary btn-sm btn-checkall-submit" disabled>Thực hiện</button>
+=======
+        <button class="btn btn-primary btn-sm btn-checkall-submit disabled">Thực hiện</button>
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
     </div>
     <table class='table mt-4'>
         <thead>
@@ -89,6 +97,7 @@
         var courseId;
         var btnDeleteCourse = document.getElementById('btn-delete-course');
         var deleteForms = document.forms['delete-course-form'];
+<<<<<<< HEAD
 
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckbox = $('input[name="courseIds[]"]');
@@ -96,6 +105,12 @@
         //  var containerForm = document.forms['container-form'];
         var containerForm = $('form[name="container-form"]')
         //console.log(containerForm)
+=======
+        var checkboxAll = $('#checkbox-all');
+        var courseItemCheckbox = $('input[name="courseIds[]"]');
+        var checkAllSubmitBtn = $('.btn-checkall-submit');
+        var containerForm = document.forms['container-form']
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
 
 
         $('#delete-course-modal').on('show.bs.modal', function (event) {
@@ -119,7 +134,10 @@
         //Course item checkbox clicked
         courseItemCheckbox.change(function () {
             var isCheckedAll = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length;
+<<<<<<< HEAD
 
+=======
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
             checkboxAll.prop('checked', isCheckedAll);
             rendexCheckAllSubmitBtn();
 
@@ -134,6 +152,7 @@
             }
         })
 
+<<<<<<< HEAD
 
 
 
@@ -151,5 +170,24 @@
 
         }
 
+=======
+        checkAllSubmitBtn.on('submit', function (e) {
+            var isSubmitable = !$(this).hasClass('disabled');
+            if (!isSubmitable) {
+                e.preventDefault();
+            }
+        });
+
+        function rendexCheckAllSubmitBtn() {
+            var checkdeCount = $('input[name="courseIds[]"]:checked').length;
+            if (checkdeCount > 0) {
+                checkAllSubmitBtn.removeClass('disabled');
+            }
+            else {
+                checkAllSubmitBtn.addClass('disabled');
+            }
+        }
+        console.log(containerForm)
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
     })
 </script>

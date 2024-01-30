@@ -62,7 +62,10 @@ class CourseController {
 
     //[ POST] / courses/handle-form-actions
     handleFormActions(req, res, next) {
+<<<<<<< HEAD
         console.log(req.body.action);
+=======
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
         switch (req.body.action) {
             case 'delete':
                 Course.delete({ _id: { $in: req.body.courseIds } })
@@ -71,8 +74,11 @@ class CourseController {
                 break;
             default:
                 res.json({ message: 'Action is invaild' });
+<<<<<<< HEAD
 
                 break;
+=======
+>>>>>>> a54d42cf9994ce43833569cb39eb15a471f52980
         }
     }
 }
